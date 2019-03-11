@@ -2,7 +2,7 @@
 ## Cấp database
 ### Show all database
 ```
-__> show dbs__
+> show dbs
 admin   0.000GB
 config  0.000GB
 local   0.000GB
