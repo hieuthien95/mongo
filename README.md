@@ -1,5 +1,5 @@
-[mongo.exe]: (#mongoexe)
-[mongoexport.exe]: (#mongoexportexe)
+[mongo.exe]: (https://github.com/hieuthien95/mongo/blob/master/#mongoexe)
+[mongoexport.exe]: (https://github.com/hieuthien95/mongo/blob/master/#mongoexportexe)
 
 # mongo.exe
 ## Cấp database
