@@ -46,6 +46,8 @@ db.collection.find(
         query,                  // câu lệnh where: {"name" : "loan", "age" : 57 }
         projection              // những record cần select: { "name": 1, "age": 1, _id: 0 }
 )
+
+db.collection.find().sort( { name: 1 } ).limit(n).skip(n)
 ```
 ```
 > db.persons.find({})
