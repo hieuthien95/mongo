@@ -125,6 +125,12 @@ C:\Windows\system32> mongodump -d mydemo -o "C:\Program Files\MongoDB\Server\4.0
 2019-03-11T18:14:51.702+0700    writing mydemo.persons to
 2019-03-11T18:14:51.710+0700    done dumping mydemo.persons (1 document)
 ```
+#### Export DB *.gz
+```
+C:\Windows\system32> mongodump -d mydemo --gzip --archive=tenfile.gz
+2019-03-11T18:27:16.917+0700    writing mydemo.persons to archive 'tenfile.gz'
+2019-03-11T18:27:16.922+0700    done dumping mydemo.persons (1 document)
+```
 
 # mongorestore.exe
 #### Import DB normal
@@ -149,8 +155,10 @@ C:\Windows\system32> mongorestore -d abc_xyz "C:\Program Files\MongoDB\Server\4.
 2019-03-11T18:21:40.292+0700    finished restoring abc_xyz.persons (1 document)
 2019-03-11T18:21:40.294+0700    done
 ```
-
-
+#### Import DB *.gz
+```
+C:\Windows\system32> mongorestore --db mydemo --gzip --archive=tenfile.gz
+```
 
 
 
