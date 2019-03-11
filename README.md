@@ -80,6 +80,24 @@ WriteResult({ "nInserted" : 1 })
         ]
 }
 ```
+#### Update
+```
+db.collection.update(
+   <query>,                                     // viết WHERE tại đây: {name:"thien", age: 24}
+   <update>,                                    // viết set hay unset tại đây để cập nhật: {age: 25, class: "mongodb"}
+   {
+     upsert: <boolean>,                         // true: nếu không tồn tại record nào => **thêm** mới record đó
+                                                // false: nếu không tồn tại record nào => **không thêm** record đó
+                                                
+     multi: <boolean>,                          // true: **cho phép** update 1 lúc nhiều record
+                                                // false: **không cho phép** update 1 lúc nhiều record
+                                                
+     writeConcern: <document>,
+     collation: <document>,
+     arrayFilters: [ <filterdocument1>, ... ]
+   }
+)
+```
 #### Delete doccument: db.persons.deleteMany({ // dieu kien })
 ```
 > db.persons.deleteMany({})
