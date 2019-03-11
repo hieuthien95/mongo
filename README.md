@@ -7,19 +7,19 @@ admin   0.000GB
 config  0.000GB
 local   0.000GB
 ```
-#### Tạo database
+#### Create database
 ```
 > use mydemo
 switched to db mydemo
 ```
-#### Xóa database
+#### Delete database
 ```
 > db.dropDatabase()
 { "dropped" : "mydemo", "ok" : 1 }
 ```
 
 ## Cấp collection
-#### Tạo collection
+#### Create collection
 ```
 > db.createCollection("persons")
 { "ok" : 1 }
@@ -30,14 +30,14 @@ switched to db mydemo
 persons
 books
 ```
-#### Xóa collection
+#### Delete collection
 ```
 > db.persons.drop()
 true
 ```
 
 ## Cấp document
-#### Thêm 1 document
+#### Insert 1 document
 ```
 > db.persons.insert({name:"loan", age: 57})
 WriteResult({ "nInserted" : 1 })
@@ -55,7 +55,7 @@ Bui Hieu Thien
 > db.persons.save(per)
 WriteResult({ "nInserted" : 1 })
 ```
-#### Thêm nhiều document
+#### Insert nhiều document
 ```
 > db.persons.insertMany([{name:"thien", age: 24}, {name:"tram"}])
 {
@@ -83,7 +83,7 @@ WriteResult({ "nInserted" : 1 })
 { "acknowledged" : true, "deletedCount" : 3 }
 ```
 
-#### Insert document bằng javascript
+#### Insert 1 document bằng javascript
 ```
 load("C:/Users/hieut/Desktop/persons.js")
 true
@@ -95,6 +95,28 @@ Nội dung file:
 3. 	"age":24.0,
 4. 	"exp":["PHP","JAVA","Golang"]
 5. })
+```
+#### Insert nhiều document bằng javascript
+```
+load("C:/Users/hieut/Desktop/persons.js")
+true
+```
+```
+Nội dung file:
+1. var pers = [
+2. 	{
+3. 		"name":"Bui Hieu Thien",
+4. 		"age":24.0,
+5. 		"exp":["PHP","JAVA","Golang"]
+6. 	},
+7. 	{
+8. 		"name":"Tran Van A",
+10. 		"age":20,
+11. 		"exp":["PHP"]
+12. 	}
+13. ]
+14. 
+15. db.persons.insert(pers)
 ```
 
 
