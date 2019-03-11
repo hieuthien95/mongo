@@ -101,6 +101,16 @@ db.collection.update(
    }
 )
 ```
+```
+> db.persons.update(
+   {name:"thien", age: 24},
+   { $set: { age: 25, class: "mongodb" } },
+   {
+     upsert: true,                        
+     multi: true
+   }
+)
+```
 #### Delete doccument: 
 ```
 db.collection.deleteMany(
@@ -124,8 +134,8 @@ db.collection.remove(
 )
 ```
 ```
-db.persons.remove(
-   { name: {$eq: 30} },
+> db.persons.remove(
+   { name: {$eq: "thien"} },
    {
      justOne: true
    }
@@ -135,7 +145,7 @@ db.persons.remove(
 
 #### Insert 1 document bằng javascript
 ```
-load("C:/Users/hieut/Desktop/persons.js")
+> load("C:/Users/hieut/Desktop/persons.js")
 true
 ```
 ```
@@ -148,7 +158,7 @@ Nội dung file:
 ```
 #### Insert nhiều document bằng javascript
 ```
-load("C:/Users/hieut/Desktop/persons.js")
+> load("C:/Users/hieut/Desktop/persons.js")
 true
 ```
 ```
