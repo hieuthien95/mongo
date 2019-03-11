@@ -6,9 +6,11 @@
 ### Cấp database
 #### Show all database
 > show dbs
+```
 admin   0.000GB
 config  0.000GB
 local   0.000GB
+```
 #### Tạo database
 > use mydemo
 switched to db mydemo
