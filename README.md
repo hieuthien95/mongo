@@ -40,10 +40,39 @@ true
 
 ___
 ## Cấp document
+#### Đánh chỉ số index
+```
+> db.zipcode.createIndex({pop:-1})
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+```
+**After**
+```
+> db.zipcode.find({pop: {$eq: 4546}}).explain("executionStats")
+"executionStats" : {
+        "executionTimeMillis" : 17,
+        "totalDocsExamined" : 29353,
+        ...
+}
+```
+**Before**
+```
+> db.zipcode.find({pop: {$eq: 4546}}).explain("executionStats")
+"executionStats" : {
+        "executionTimeMillis" : 0,
+        "totalDocsExamined" : 2,
+        ...
+}
+```
+
 #### Show document
 ```
 db.collection.find(
-        query,                  // câu lệnh where: {"name" : "loan", "age" : 57 }
+        query,                  // câu lệnh where: { name:"Bui Hieu Thien", age: { $gt: 24 } }
         projection              // những record cần select: { "name": 1, "age": 1, _id: 0 }
 )
 
