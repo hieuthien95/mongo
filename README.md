@@ -87,6 +87,7 @@ db.collection.update(
    <update>,                                    // viết SET(update nội dung) hay UNSET(xóa field) tại đây để cập nhật: 
                                                 // . vd set: {age: 25, class: "mongodb"}
                                                 // . vd unset: {age: "", ...}
+                                                https://docs.mongodb.com/manual/reference/method/db.collection.update/#update-parameter
    {
      upsert: <boolean>,                         // true: nếu không tồn tại record nào => **thêm** mới record đó
                                                 // false: nếu không tồn tại record nào => **không thêm** record đó
@@ -100,11 +101,37 @@ db.collection.update(
    }
 )
 ```
-#### Delete doccument: db.persons.deleteMany({ // dieu kien })
+#### Delete doccument: 
 ```
-> db.persons.deleteMany({})
+db.collection.deleteMany(
+   <query>
+)
+```
+```
+> db.persons.deleteMany({name: "thien"})
 { "acknowledged" : true, "deletedCount" : 3 }
 ```
+#### Remove doccument
+```
+db.collection.remove(
+   <query>,                     // https://docs.mongodb.com/manual/reference/operator/
+   {
+     justOne: <boolean>,        // true: chỉ xóa 1 record
+                                // false: xóa nhiều
+     writeConcern: <document>,
+     collation: <document>
+   }
+)
+```
+```
+db.persons.remove(
+   { name: {$eq: 30} },
+   {
+     justOne: true
+   }
+)
+```
+
 
 #### Insert 1 document bằng javascript
 ```
