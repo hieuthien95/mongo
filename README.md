@@ -40,10 +40,15 @@ true
 
 ___
 ## Cấp document
-#### Show all document
+#### Show document
+```
+db.collection.find(
+        query,                  // câu lệnh where: {"name" : "loan", "age" : 57 }
+        projection              // những record cần select: { "name": 1, "age": 1, _id: 0 }
+)
+```
 ```
 > db.persons.find({})
-
 > db.persons.find()
 
 > db.persons.find().pretty()
@@ -51,6 +56,7 @@ ___
 { "_id" : ObjectId("5c85e9f3da2c0d6f87b95a91"), "name" : "thien", "age" : 24 }
 { "_id" : ObjectId("5c85e9f3da2c0d6f87b95a92"), "name" : "tram" }
 ```
+
 #### Insert 1 document
 ```
 > db.persons.insert({name:"loan", age: 57})
@@ -135,7 +141,7 @@ db.collection.remove(
 ```
 ```
 > db.persons.remove(
-   { name: {$eq: "thien"} },
+   { age: {$gt: 25} },
    {
      justOne: true
    }
