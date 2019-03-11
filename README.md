@@ -5,8 +5,8 @@
 
 ### Cấp database
 #### Show all database
-> show dbs
 ```
+> show dbs
 admin   0.000GB
 config  0.000GB
 local   0.000GB
