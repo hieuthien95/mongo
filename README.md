@@ -1,7 +1,5 @@
-[mongo.exe]: (https://github.com/hieuthien95/mongo/blob/master/#mongoexe)
-[mongoexport.exe]: (https://github.com/hieuthien95/mongo/blob/master/#mongoexportexe)
-
 # mongo.exe
+___
 ## Cấp database
 #### Show all database
 ```
@@ -21,6 +19,7 @@ switched to db mydemo
 { "dropped" : "mydemo", "ok" : 1 }
 ```
 
+___
 ## Cấp collection
 #### Show all collection
 ```
@@ -39,6 +38,7 @@ books
 true
 ```
 
+___
 ## Cấp document
 #### Show all document
 ```
