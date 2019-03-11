@@ -42,6 +42,16 @@ ___
 ## Cấp document
 #### Đánh chỉ số index
 ```
+db.collection.createIndex( 
+        { 
+                field1>: <type>, <field2>: <type2>, ... 
+        }, 
+        { 
+                // unique option (unique: true) 
+        }  
+)
+```
+```
 > db.zipcode.createIndex({pop:-1})
 {
         "createdCollectionAutomatically" : false,
@@ -49,6 +59,29 @@ ___
         "numIndexesAfter" : 2,
         "ok" : 1
 }
+
+> db.zipcode.getIndexes()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "mydemo.zipcode"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "pop" : -1
+                },
+                "name" : "pop_-1",
+                "ns" : "mydemo.zipcode"
+        }
+]
+
+> db.zipcode.dropIndex("pop_-1")
+{ "nIndexesWas" : 2, "ok" : 1 }
 ```
 **After**
 ```
