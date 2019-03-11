@@ -83,6 +83,20 @@ WriteResult({ "nInserted" : 1 })
 { "acknowledged" : true, "deletedCount" : 3 }
 ```
 
+#### Insert document bằng javascript
+```
+load("C:/Users/hieut/Desktop/persons.js")
+true
+```
+```
+Nội dung file:
+1. db.persons.insert({
+2. 	"name":"Bui Hieu Thien",
+3. 	"age":24.0,
+4. 	"exp":["PHP","JAVA","Golang"]
+5. })
+```
+
 
 # mongoexport.exe
 #### Export dạng json
