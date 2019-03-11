@@ -19,16 +19,16 @@ switched to db mydemo
 ```
 
 ## Cấp collection
-#### Create collection
-```
-> db.createCollection("persons")
-{ "ok" : 1 }
-```
 #### Show all collection
 ```
 > show collections
 persons
 books
+```
+#### Create collection
+```
+> db.createCollection("persons")
+{ "ok" : 1 }
 ```
 #### Delete collection
 ```
@@ -37,6 +37,17 @@ true
 ```
 
 ## Cấp document
+#### Show all document
+```
+> db.persons.find({})
+
+> db.persons.find()
+
+> db.persons.find().pretty()
+{ "_id" : ObjectId("5c85ea1eda2c0d6f87b95a90"), "name" : "loan", "age" : 57 }
+{ "_id" : ObjectId("5c85e9f3da2c0d6f87b95a91"), "name" : "thien", "age" : 24 }
+{ "_id" : ObjectId("5c85e9f3da2c0d6f87b95a92"), "name" : "tram" }
+```
 #### Insert 1 document
 ```
 > db.persons.insert({name:"loan", age: 57})
@@ -65,17 +76,6 @@ WriteResult({ "nInserted" : 1 })
                 ObjectId("5c85e9f3da2c0d6f87b95a91")
         ]
 }
-```
-#### Show all document
-```
-> db.persons.find({})
-
-> db.persons.find()
-
-> db.persons.find().pretty()
-{ "_id" : ObjectId("5c85ea1eda2c0d6f87b95a90"), "name" : "loan", "age" : 57 }
-{ "_id" : ObjectId("5c85e9f3da2c0d6f87b95a91"), "name" : "thien", "age" : 24 }
-{ "_id" : ObjectId("5c85e9f3da2c0d6f87b95a92"), "name" : "tram" }
 ```
 #### Delete doccument: db.persons.deleteMany({ // dieu kien })
 ```
