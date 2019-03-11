@@ -1,43 +1,43 @@
 # mongo.exe
 ## Cấp database
-### Show all database
+#### Show all database
 ```
 > show dbs
 admin   0.000GB
 config  0.000GB
 local   0.000GB
 ```
-### Tạo database
+#### Tạo database
 ```
 > use mydemo
 switched to db mydemo
 ```
-### Xóa database
+#### Xóa database
 ```
 > db.dropDatabase()
 { "dropped" : "mydemo", "ok" : 1 }
 ```
 
 ## Cấp collection
-### Tạo collection
+#### Tạo collection
 ```
 > db.createCollection("persons")
 { "ok" : 1 }
 ```
-### Show all collection
+#### Show all collection
 ```
 > show collections
 persons
 books
 ```
-### Xóa collection
+#### Xóa collection
 ```
 > db.persons.drop()
 true
 ```
 
 ## Cấp document
-### Thêm 1 document
+#### Thêm 1 document
 ```
 > db.persons.insert({name:"loan", age: 57})
 WriteResult({ "nInserted" : 1 })
@@ -55,7 +55,7 @@ Bui Hieu Thien
 > db.persons.save(per)
 WriteResult({ "nInserted" : 1 })
 ```
-### Thêm nhiều document
+#### Thêm nhiều document
 ```
 > db.persons.insertMany([{name:"thien", age: 24}, {name:"tram"}])
 {
@@ -66,7 +66,7 @@ WriteResult({ "nInserted" : 1 })
         ]
 }
 ```
-### Show all document
+#### Show all document
 ```
 > db.persons.find({})
 
@@ -77,7 +77,7 @@ WriteResult({ "nInserted" : 1 })
 { "_id" : ObjectId("5c85e9f3da2c0d6f87b95a91"), "name" : "thien", "age" : 24 }
 { "_id" : ObjectId("5c85e9f3da2c0d6f87b95a92"), "name" : "tram" }
 ```
-### Delete doccument: db.persons.deleteMany({ // dieu kien })
+#### Delete doccument: db.persons.deleteMany({ // dieu kien })
 ```
 > db.persons.deleteMany({})
 { "acknowledged" : true, "deletedCount" : 3 }
@@ -85,13 +85,13 @@ WriteResult({ "nInserted" : 1 })
 
 
 # mongoexport.exe
-### Export dạng json
+#### Export dạng json
 ```
 C:\Windows\system32> mongoexport --db mydemo --collection persons --out "C:\Program Files\MongoDB\Server\4.0\data\export\persons.json"
 2019-03-11T13:11:34.076+0700    connected to: localhost
 2019-03-11T13:11:34.077+0700    exported 1 record
 ```
-### Export dạng csv
+#### Export dạng csv
 ```
 C:\Windows\system32> mongoexport -d mydemo -c persons --type=csv  -o "C:\Program Files\MongoDB\Server\4.0\data\export\persons.csv" -f id,name,exp
 2019-03-11T13:11:34.076+0700    connected to: localhost
