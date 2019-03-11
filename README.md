@@ -122,7 +122,8 @@ Nội dung file:
 15. db.persons.insert(pers)
 ```
 
-
+___
+___
 # mongoexport.exe
 #### Export dạng json
 ```
@@ -137,6 +138,8 @@ C:\Windows\system32> mongoexport -d mydemo -c persons --type=csv  -o "C:\Program
 2019-03-11T13:11:34.077+0700    exported 1 record
 ```
 
+___
+___
 # mongoimport.exe
 ### Import dạng json
 ```
@@ -151,6 +154,8 @@ C:\Windows\system32> mongoimport -d mydemo -c persons --type=csv --file "C:\Prog
 2019-03-11T13:14:47.849+0700    imported 1 document
 ```
 
+___
+___
 # mongodump.exe
 #### Export DB normal
 ```
@@ -171,6 +176,8 @@ C:\Windows\system32> mongodump -d mydemo --gzip --archive=tenfile.gz
 2019-03-11T18:27:16.922+0700    done dumping mydemo.persons (1 document)
 ```
 
+___
+___
 # mongorestore.exe
 #### Import DB normal
 ```
