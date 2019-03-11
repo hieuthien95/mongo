@@ -1,3 +1,6 @@
+[mongo.exe]: #mongoexe
+[mongoexport.exe]: #mongoexportexe
+
 # mongo.exe
 ## Cấp database
 #### Show all database
