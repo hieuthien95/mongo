@@ -50,6 +50,7 @@ Bui Hieu Thien
 24
 > per.exp = ["PHP", "JAVA", "Golang"]
 [ "PHP", "JAVA", "Golang" ]
+
 > db.persons.insert(per)
 > db.persons.save(per)
 WriteResult({ "nInserted" : 1 })
@@ -68,7 +69,9 @@ WriteResult({ "nInserted" : 1 })
 ### Show all document
 ```
 > db.persons.find({})
+
 > db.persons.find()
+
 > db.persons.find().pretty()
 { "_id" : ObjectId("5c85ea1eda2c0d6f87b95a90"), "name" : "loan", "age" : 57 }
 { "_id" : ObjectId("5c85e9f3da2c0d6f87b95a91"), "name" : "thien", "age" : 24 }
@@ -82,12 +85,13 @@ WriteResult({ "nInserted" : 1 })
 
 
 # mongoexport.exe
+### Export dạng json
 ```
 C:\Windows\system32> mongoexport --db mydemo --collection persons --out "C:\Program Files\MongoDB\Server\4.0\data\export\persons.json"
 2019-03-11T13:11:34.076+0700    connected to: localhost
 2019-03-11T13:11:34.077+0700    exported 1 record
 ```
-
+### Export dạng csv
 ```
 C:\Windows\system32> mongoexport -d mydemo -c persons --type=csv  -o "C:\Program Files\MongoDB\Server\4.0\data\export\persons.csv" -f id,name,exp
 2019-03-11T13:11:34.076+0700    connected to: localhost
@@ -95,12 +99,13 @@ C:\Windows\system32> mongoexport -d mydemo -c persons --type=csv  -o "C:\Program
 ```
 
 # mongoimport.exe
+### Import dạng json
 ```
 C:\Windows\system32> mongoimport --db mydemo --collection persons --file "C:\Program Files\MongoDB\Server\4.0\data\export\persons.json"
 2019-03-11T13:14:47.830+0700    connected to: localhost
 2019-03-11T13:14:47.849+0700    imported 1 document
 ```
-
+### Import dạng csv
 ```
 C:\Windows\system32> mongoimport -d mydemo -c persons --type=csv --file "C:\Program Files\MongoDB\Server\4.0\data\export\persons.csv" --headerline
 2019-03-11T13:14:47.830+0700    connected to: localhost
