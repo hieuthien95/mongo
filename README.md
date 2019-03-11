@@ -47,9 +47,13 @@ db.collection.createIndex(
                 field1>: <type>, <field2>: <type2>, ... 
         }, 
         { 
-                // unique option (unique: true) 
+                // unique option (unique: true) ,
+                // sparse option (sparse: true)
         }  
 )
+
+PS: > db.players.createIndex( { score: 1 } , { sparse: true } )
+    > db.players.find().sort( { score: -1 } ).hint( { score: 1 } )
 ```
 ```
 > db.zipcode.createIndex({pop:-1})
