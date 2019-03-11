@@ -1,45 +1,43 @@
-# Mongo
-
-## mongo.exe
-
-
-### Cấp database
-#### Show all database
+# mongo.exe
+## Cấp database
+### Show all database
 ```
-> show dbs
+**> show dbs**
 admin   0.000GB
 config  0.000GB
 local   0.000GB
 ```
-#### Tạo database
+### Tạo database
 ```
 > use mydemo
 switched to db mydemo
-#### Xóa database
+```
+### Xóa database
+```
 > db.dropDatabase()
 { "dropped" : "mydemo", "ok" : 1 }
 ```
 
-### Cấp collection
-#### Tạo collection
+## Cấp collection
+### Tạo collection
 ```
 > db.createCollection("persons")
 { "ok" : 1 }
 ```
-#### Show all collection
+### Show all collection
 ```
 > show collections
 persons
 books
 ```
-#### Xóa collection
+### Xóa collection
 ```
 > db.persons.drop()
 true
 ```
 
-### Cấp document
-#### Thêm 1 document
+## Cấp document
+### Thêm 1 document
 ```
 > db.persons.insert({name:"loan", age: 57})
 WriteResult({ "nInserted" : 1 })
@@ -56,7 +54,7 @@ Bui Hieu Thien
 > db.persons.save(per)
 WriteResult({ "nInserted" : 1 })
 ```
-#### Thêm nhiều document
+### Thêm nhiều document
 ```
 > db.persons.insertMany([{name:"thien", age: 24}, {name:"tram"}])
 {
@@ -67,7 +65,7 @@ WriteResult({ "nInserted" : 1 })
         ]
 }
 ```
-#### Show all document
+### Show all document
 ```
 > db.persons.find({})
 > db.persons.find()
@@ -75,13 +73,15 @@ WriteResult({ "nInserted" : 1 })
 { "_id" : ObjectId("5c85ea1eda2c0d6f87b95a90"), "name" : "loan", "age" : 57 }
 { "_id" : ObjectId("5c85e9f3da2c0d6f87b95a91"), "name" : "thien", "age" : 24 }
 { "_id" : ObjectId("5c85e9f3da2c0d6f87b95a92"), "name" : "tram" }
-#### Delete doccument: db.persons.deleteMany({ // dieu kien })
+```
+### Delete doccument: db.persons.deleteMany({ // dieu kien })
+```
 > db.persons.deleteMany({})
 { "acknowledged" : true, "deletedCount" : 3 }
 ```
 
 
-## mongoexport.exe
+# mongoexport.exe
 ```
 C:\Windows\system32> mongoexport --db mydemo --collection persons --out "C:\Program Files\MongoDB\Server\4.0\data\export\persons.json"
 2019-03-11T13:11:34.076+0700    connected to: localhost
@@ -94,7 +94,7 @@ C:\Windows\system32> mongoexport -d mydemo -c persons --type=csv  -o "C:\Program
 2019-03-11T13:11:34.077+0700    exported 1 record
 ```
 
-## mongoimport.exe
+# mongoimport.exe
 ```
 C:\Windows\system32> mongoimport --db mydemo --collection persons --file "C:\Program Files\MongoDB\Server\4.0\data\export\persons.json"
 2019-03-11T13:14:47.830+0700    connected to: localhost
