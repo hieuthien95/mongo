@@ -84,7 +84,9 @@ WriteResult({ "nInserted" : 1 })
 ```
 db.collection.update(
    <query>,                                     // viết WHERE tại đây: {name:"thien", age: 24}
-   <update>,                                    // viết SET hay UNSET tại đây để cập nhật: {age: 25, class: "mongodb"}
+   <update>,                                    // viết SET(update nội dung) hay UNSET(xóa field) tại đây để cập nhật: 
+                                                // . vd set: {age: 25, class: "mongodb"}
+                                                // . vd unset: {age: "", ...}
    {
      upsert: <boolean>,                         // true: nếu không tồn tại record nào => **thêm** mới record đó
                                                 // false: nếu không tồn tại record nào => **không thêm** record đó
