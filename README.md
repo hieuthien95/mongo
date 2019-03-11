@@ -1,5 +1,5 @@
-[mongo.exe]: #mongoexe
-[mongoexport.exe]: #mongoexportexe
+[mongo.exe]: (#mongoexe)
+[mongoexport.exe]: (#mongoexportexe)
 
 # mongo.exe
 ## Cấp database
