@@ -41,7 +41,9 @@ true
 ___
 ## Cấp document
 ### Đánh chỉ số index
-**single-multi-sparse-ttl option**
+**single-multi option** 
+**sparse option** loại bỏ null tại field được index
+**ttl option** Time to live
 ```
 db.collection.createIndex( 
         { 
@@ -105,6 +107,53 @@ PS: > db.players.createIndex( { score: 1 } , { sparse: true } )
         "executionTimeMillis" : 0,
         "totalDocsExamined" : 2,
         ...
+}
+```
+**Text indexes** search text input có trong các field được liệt kê
+```
+db.adminCommand({ setParameter: true, textSearchEnabled: true})
+
+db.collection.createIndex(
+   { field1>: "text", <field2>: "text"... },    // các field muốn search được liệt kê
+   { default_language: "spanish" }              // docs.mongodb.com/manual/reference/text-search-languages/#text-search-languages
+)
+
+db.collection.find(
+{ $text: { 
+                $search: "text noi dung",       "noi dung": "noi"->match, "dung"->match
+                                                "\"noi dung\"": "noi dung"->match
+                                                "noidung -noidungkhac": "noidung"->match, "noidungkhac"->fail
+                $caseSensitive: true            // phân biệt hoa thường
+         } 
+})
+```
+```
+> db.persons.createIndex( 
+    { name: "text", exp: "text" }, 
+    {default_language: "none"} 
+)
+
+> db.persons.find({ $text: { $search: "Thien" } })
+{
+    "_id" : ObjectId("5c864c0fda2c0d6f87b95a9c"),
+    "name" : "Bui Hieu Thien",
+    "age" : 25.0,
+    "exp" : [ 
+        "PHP", 
+        "JAVA", 
+        "Golang"
+    ],
+    "class" : "mongodb"
+}
+
+> db.persons.find({ $text: { $search: "php -golang"} })
+{
+    "_id" : ObjectId("5c864c0fda2c0d6f87b95a9d"),
+    "name" : "Tran Van A",
+    "age" : 20.0,
+    "exp" : [ 
+        "PHP"
+    ]
 }
 ```
 
