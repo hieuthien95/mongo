@@ -1,46 +1,46 @@
-# mongo.exe
+# (I) mongo.exe
 ___
-## Cấp database
-#### Show all database
+## 1. Cấp database
+#### a. Show all database
 ```
 > show dbs
 admin   0.000GB
 config  0.000GB
 local   0.000GB
 ```
-#### Create database
+#### b. Create database
 ```
 > use mydemo
 switched to db mydemo
 ```
-#### Delete database
+#### c. Delete database
 ```
 > db.dropDatabase()
 { "dropped" : "mydemo", "ok" : 1 }
 ```
 
 ___
-## Cấp collection
-#### Show all collection
+## 1. Cấp collection
+#### a. Show all collection
 ```
 > show collections
 persons
 books
 ```
-#### Create collection
+#### b. Create collection
 ```
 > db.createCollection("persons")
 { "ok" : 1 }
 ```
-#### Delete collection
+#### c. Delete collection
 ```
 > db.persons.drop()
 true
 ```
 
 ___
-## Cấp document
-### Đánh chỉ số index
+## 1. Cấp document
+### a. Đánh chỉ số index
 **single-multi option** 
 **sparse option** loại bỏ null tại field được index
 **ttl option** Time to live
@@ -160,7 +160,7 @@ db.collection.find({
 }
 ```
 
-### Show document
+### b. Show document
 ```
 // https://docs.mongodb.com/manual/reference/operator/query/regex/index.html
 db.collection.find({ 
@@ -227,7 +227,7 @@ db.collection.find().sort( { name: 1 } ).limit(n).skip(n)
 }
 ```
 
-### Insert 1 document
+### c. Insert 1 document
 ```
 > db.persons.insert({name:"loan", age: 57})
 WriteResult({ "nInserted" : 1 })
@@ -245,7 +245,7 @@ Bui Hieu Thien
 > db.persons.save(per)
 WriteResult({ "nInserted" : 1 })
 ```
-### Insert nhiều document
+### d. Insert nhiều document
 ```
 > db.persons.insertMany([{name:"thien", age: 24}, {name:"tram"}])
 {
@@ -256,7 +256,7 @@ WriteResult({ "nInserted" : 1 })
         ]
 }
 ```
-### Update
+### e. Update
 ```
 db.collection.update(
    <query>,                                     // viết WHERE tại đây: {name:"thien", age: 24}
@@ -287,7 +287,7 @@ db.collection.update(
    }
 )
 ```
-### Delete doccument: 
+### d. Delete doccument: 
 ```
 db.collection.deleteMany(
    <query>
@@ -297,7 +297,7 @@ db.collection.deleteMany(
 > db.persons.deleteMany({name: "thien"})
 { "acknowledged" : true, "deletedCount" : 3 }
 ```
-### Remove doccument
+### e. Remove doccument
 ```
 db.collection.remove(
    <query>,                     // https://docs.mongodb.com/manual/reference/operator/
@@ -319,7 +319,7 @@ db.collection.remove(
 ```
 
 
-### Insert 1 document bằng javascript
+### f. Insert 1 document bằng javascript
 ```
 > load("C:/Users/hieut/Desktop/persons.js")
 true
@@ -332,7 +332,7 @@ Nội dung file:
 4. 	"exp":["PHP","JAVA","Golang"]
 5. })
 ```
-### Insert nhiều document bằng javascript
+### g. Insert nhiều document bằng javascript
 ```
 > load("C:/Users/hieut/Desktop/persons.js")
 true
@@ -357,14 +357,14 @@ Nội dung file:
 
 ___
 ___
-# mongoexport.exe
-### Export dạng json
+# (II) mongoexport.exe
+### a. Export dạng json
 ```
 C:\Windows\system32> mongoexport --db mydemo --collection persons --out "C:\Program Files\MongoDB\Server\4.0\data\export\persons.json"
 2019-03-11T13:11:34.076+0700    connected to: localhost
 2019-03-11T13:11:34.077+0700    exported 1 record
 ```
-### Export dạng csv
+### b. Export dạng csv
 ```
 C:\Windows\system32> mongoexport -d mydemo -c persons --type=csv  -o "C:\Program Files\MongoDB\Server\4.0\data\export\persons.csv" -f id,name,exp
 2019-03-11T13:11:34.076+0700    connected to: localhost
@@ -373,14 +373,14 @@ C:\Windows\system32> mongoexport -d mydemo -c persons --type=csv  -o "C:\Program
 
 ___
 ___
-# mongoimport.exe
-### Import dạng json
+# (III) mongoimport.exe
+### a. Import dạng json
 ```
 C:\Windows\system32> mongoimport --db mydemo --collection persons --file "C:\Program Files\MongoDB\Server\4.0\data\export\persons.json"
 2019-03-11T13:14:47.830+0700    connected to: localhost
 2019-03-11T13:14:47.849+0700    imported 1 document
 ```
-### Import dạng csv
+### b. Import dạng csv
 ```
 C:\Windows\system32> mongoimport -d mydemo -c persons --type=csv --file "C:\Program Files\MongoDB\Server\4.0\data\export\persons.csv" --headerline
 2019-03-11T13:14:47.830+0700    connected to: localhost
@@ -389,20 +389,20 @@ C:\Windows\system32> mongoimport -d mydemo -c persons --type=csv --file "C:\Prog
 
 ___
 ___
-# mongodump.exe
-### Export DB normal
+# (IV) mongodump.exe
+### a. Export DB normal
 ```
 C:\Windows\system32> mongodump -d mydemo -o "C:\Program Files\MongoDB\Server\4.0\data\export"
 2019-03-11T18:11:45.189+0700    writing mydemo.persons to
 2019-03-11T18:11:45.201+0700    done dumping mydemo.persons (1 document)
 ```
-### Export DB gzip
+### b. Export DB gzip
 ```
 C:\Windows\system32> mongodump -d mydemo -o "C:\Program Files\MongoDB\Server\4.0\data\export" --gzip
 2019-03-11T18:14:51.702+0700    writing mydemo.persons to
 2019-03-11T18:14:51.710+0700    done dumping mydemo.persons (1 document)
 ```
-### Export DB *.gz
+### c. Export DB *.gz
 ```
 C:\Windows\system32> mongodump -d mydemo --gzip --archive=tenfile.gz
 2019-03-11T18:27:16.917+0700    writing mydemo.persons to archive 'tenfile.gz'
@@ -411,8 +411,8 @@ C:\Windows\system32> mongodump -d mydemo --gzip --archive=tenfile.gz
 
 ___
 ___
-# mongorestore.exe
-### Import DB normal
+# (V) mongorestore.exe
+### a. Import DB normal
 ```
 C:\Windows\system32> mongorestore -d abc_xyz "C:\Program Files\MongoDB\Server\4.0\data\export\mydemo2"
 2019-03-11T18:18:48.195+0700    the --db and --collection args should only be used when restoring from a BSON file. Other uses are deprecated and will not exist in the future; use --nsInclude instead
@@ -423,7 +423,7 @@ C:\Windows\system32> mongorestore -d abc_xyz "C:\Program Files\MongoDB\Server\4.
 2019-03-11T18:18:48.221+0700    finished restoring abc_xyz.persons (1 document)
 2019-03-11T18:18:48.223+0700    done
 ```
-### Import DB gzip
+### b. Import DB gzip
 ```
 C:\Windows\system32> mongorestore -d abc_xyz "C:\Program Files\MongoDB\Server\4.0\data\export\mydemo" --gzip
 2019-03-11T18:21:40.270+0700    the --db and --collection args should only be used when restoring from a BSON file. Other uses are deprecated and will not exist in the future; use --nsInclude instead
@@ -434,7 +434,7 @@ C:\Windows\system32> mongorestore -d abc_xyz "C:\Program Files\MongoDB\Server\4.
 2019-03-11T18:21:40.292+0700    finished restoring abc_xyz.persons (1 document)
 2019-03-11T18:21:40.294+0700    done
 ```
-### Import DB *.gz
+### c. Import DB *.gz
 ```
 C:\Windows\system32> mongorestore --db mydemo --gzip --archive=tenfile.gz
 ```
