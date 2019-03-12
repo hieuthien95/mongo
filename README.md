@@ -53,6 +53,7 @@ db.collection.createIndex(
                 // unique option: {unique: true},
                 // sparse option: {sparse: true},
                 // TTL option: {expireAfterSeconds: 3600},
+                // Partial option: partialFilterExpression: { salary: { $gt: 5 } } 
         }  
 )
 
@@ -118,12 +119,14 @@ db.collection.createIndex(
    { default_language: "spanish" }              // docs.mongodb.com/manual/reference/text-search-languages/#text-search-languages
 )
 
-db.collection.find(
-{ $text: { 
+db.collection.find({ 
+        $text: { 
                 $search: "text noi dung",       "noi dung": "noi"->match, "dung"->match
                                                 "\"noi dung\"": "noi dung"->match
                                                 "noidung -noidungkhac": "noidung"->match, "noidungkhac"->fail
-                $caseSensitive: true            // phân biệt hoa thường
+                $caseSensitive: <boolean>,    
+                $language: <string>,
+                $diacriticSensitive: <boolean>
          } 
 })
 ```
@@ -159,6 +162,14 @@ db.collection.find(
 
 ### Show document
 ```
+// https://docs.mongodb.com/manual/reference/operator/query/regex/index.html
+db.collection.find({ 
+    <field>: { 
+        $regex: /pattern/, 
+        $options: '<options>' 
+    } 
+})
+
 db.collection.find(
         query,                  // câu lệnh where: { name:"Bui Hieu Thien", age: { $gt: 24 } }
         projection              // những record cần select: { "name": 1, "age": 1, _id: 0 }
@@ -167,6 +178,8 @@ db.collection.find(
 db.collection.find().sort( { name: 1 } ).limit(n).skip(n)
 ```
 ```
+> db.products.find( { sku: { $regex: /^ABC/i } } )
+
 > db.persons.find({})
 > db.persons.find()
 
@@ -174,6 +187,44 @@ db.collection.find().sort( { name: 1 } ).limit(n).skip(n)
 { "_id" : ObjectId("5c85ea1eda2c0d6f87b95a90"), "name" : "loan", "age" : 57 }
 { "_id" : ObjectId("5c85e9f3da2c0d6f87b95a91"), "name" : "thien", "age" : 24 }
 { "_id" : ObjectId("5c85e9f3da2c0d6f87b95a92"), "name" : "tram" }
+
+> db.restaurant.find({       
+    grades: {
+        $elemMatch: { 
+            grade: "A", 
+            score: {$gte: 13}, 
+            date: { 
+                $gt: new Date(2014,1,1), 
+                $lt: new Date(2014,1,2) 
+            } 
+        }
+    }
+})
+{
+    "_id" : ObjectId("5c872bb1c0841c2215236763"),
+    "address" : {
+        "building" : "9718",
+        "coord" : [ 
+            -73.8887152, 
+            40.6337296
+        ],
+    },
+    "borough" : "Brooklyn",
+    "grades" : [ 
+        {
+            "date" : ISODate("2014-02-01T00:00:00.000Z"),
+            "grade" : "A",
+            "score" : 13
+        }, 
+        {
+            "date" : ISODate("2013-01-09T00:00:00.000Z"),
+            "grade" : "A",
+            "score" : 12
+        }, 
+    ],
+    "name" : "Win Hing Chinese Restaurant",
+    "restaurant_id" : "41152860"
+}
 ```
 
 ### Insert 1 document
