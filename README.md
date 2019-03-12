@@ -47,8 +47,9 @@ db.collection.createIndex(
                 field1>: <type>, <field2>: <type2>, ... 
         }, 
         { 
-                // unique option (unique: true) ,
-                // sparse option (sparse: true)
+                // unique option: {unique: true},
+                // sparse option: {sparse: true},
+                // TTL option: {expireAfterSeconds: 3600},
         }  
 )
 
