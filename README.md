@@ -444,9 +444,8 @@ C:\Windows\system32> mongorestore --db mydemo --gzip --archive=tenfile.gz
 ```
 
 
-=========
-=========
-# Tham khảo
+=====
+# Tham khảo Cursor Method
 ## Max/Min
 ```
 > db.products.insertMany( [
