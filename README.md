@@ -47,7 +47,7 @@ ___
 
 > **ttl option** Time to live
 ```
-db.collection.createIndex( 
+> db.collection.createIndex( 
         { 
                 field1>: <type>, <field2>: <type2>, ... 
         }, 
@@ -116,14 +116,14 @@ PS: > db.players.createIndex( { score: 1 } , { sparse: true } )
 
 > **Text indexes** search text input có trong các field được liệt kê
 ```
-db.adminCommand({ setParameter: true, textSearchEnabled: true})
+> db.adminCommand({ setParameter: true, textSearchEnabled: true})
 
-db.collection.createIndex(
+> db.collection.createIndex(
    { field1>: "text", <field2>: "text"... },    // các field muốn search được liệt kê
    { default_language: "spanish" }              // docs.mongodb.com/manual/reference/text-search-languages/#text-search-languages
 )
 
-db.collection.find({ 
+> db.collection.find({ 
         $text: { 
                 $search: "text noi dung",       // "noi dung": "noi"->match, "dung"->match
                                                 // "\"noi dung\"": "noi dung"->match
@@ -167,19 +167,19 @@ db.collection.find({
 ### b. Show document
 ```
 // https://docs.mongodb.com/manual/reference/operator/query/regex/index.html
-db.collection.find({ 
+> db.collection.find({ 
     <field>: { 
         $regex: /pattern/, 
         $options: '<options>' 
     } 
 })
 
-db.collection.find(
+> db.collection.find(
         query,                  // câu lệnh where: { name:"Bui Hieu Thien", age: { $gt: 24 } }
         projection              // những record cần select: { "name": 1, "age": 1, _id: 0 }
 )
 
-db.collection.find().sort( { name: 1 } ).limit(n).skip(n)
+> db.collection.find().sort( { name: 1 } ).limit(n).skip(n)
 ```
 ```
 > db.products.find( { sku: { $regex: /^ABC/i } } )
@@ -262,7 +262,7 @@ WriteResult({ "nInserted" : 1 })
 ```
 ### e. Update
 ```
-db.collection.update(
+> db.collection.update(
    <query>,                                     // viết WHERE tại đây: {name:"thien", age: 24}
    <update>,                                    // viết SET(update nội dung) hay UNSET(xóa field) tại đây để cập nhật: 
                                                 // . vd set: {age: 25, class: "mongodb"}
@@ -293,7 +293,7 @@ db.collection.update(
 ```
 ### d. Delete doccument: 
 ```
-db.collection.deleteMany(
+> db.collection.deleteMany(
    <query>
 )
 ```
@@ -303,7 +303,7 @@ db.collection.deleteMany(
 ```
 ### e. Remove doccument
 ```
-db.collection.remove(
+> db.collection.remove(
    <query>,                     // https://docs.mongodb.com/manual/reference/operator/
    {
      justOne: <boolean>,        // true: chỉ xóa 1 record
@@ -442,6 +442,61 @@ C:\Windows\system32> mongorestore -d abc_xyz "C:\Program Files\MongoDB\Server\4.
 ```
 C:\Windows\system32> mongorestore --db mydemo --gzip --archive=tenfile.gz
 ```
+
+
+=========
+=========
+# Tham khảo
+## Max/Min
+```
+> db.products.insertMany( [
+    { "_id" : 5, "item" : "mango", "type" : "cortland", "cost" : 1.29, "warrantyYears" : 1, "available" : false },
+    { "_id" : 9, "item" : "mango", "type" : "fuji", "cost" : 1.99 },
+    { "_id" : 7, "item" : "mango", "type" : "honey crisp", "cost" : 1.99, "warrantyYears" : 1, "available" : true },
+    { "_id" : 10, "item" : "mango", "type" : "jonagold", "cost" : 1.29, "warrantyYears" : 1, "available" : false },
+    { "_id" : 1, "item" : "mango", "type" : "jonathan", "cost" : 1.29 },
+    { "_id" : 6, "item" : "mango", "type" : "mcintosh", "cost" : 1.29 },
+    { "_id" : 8, "item" : "orange", "type" : "cara", "cost" : 2.99 },
+    { "_id" : 4, "item" : "orange", "type" : "navel", "cost" : 1.39, "warrantyYears" : 1, "available" : true },
+    { "_id" : 3, "item" : "orange", "type" : "satsuma", "cost" : 1.99 },
+    { "_id" : 2, "item" : "orange", "type" : "valencia", "cost" : 0.99, "warrantyYears" : 1, "available" : true }
+] )
+```
+
+```
+> db.products.createIndex({item: 1, type: 1})
+> db.products.createIndex({item: 1, type: -1})
+> db.products.createIndex({cost: 1})
+
+
+> db.products.getIndexKeys()
+[
+    {
+        "_id" : 1
+    },
+    {
+        "item" : 1.0,
+        "type" : 1.0
+    },
+    {
+        "item" : 1.0,
+        "type" : -1.0
+    },
+    {
+        "cost" : 1.0
+    }
+]
+
+> db.products.find().max( { item: 'mango', type: 'jonagold' } ).hint( { item: 1, type: 1 } )
+...
+
+> db.products.find().min( { item: 'mango', type: 'jonagold' } ).hint( { item: 1, type: 1 } )
+...
+
+> db.products.find().min( { cost: 1.39 } ).max( { cost: 1.99 } ).hint( { cost: 1 } )
+...
+```
+
 
 
 
