@@ -41,9 +41,9 @@ true
 ___
 ## 1. Cấp document
 ### a. Đánh chỉ số index
-**single-multi option** 
-**sparse option** loại bỏ null tại field được index
-**ttl option** Time to live
+> **single-multi option** 
+> **sparse option** loại bỏ null tại field được index
+> **ttl option** Time to live
 ```
 db.collection.createIndex( 
         { 
@@ -110,7 +110,7 @@ PS: > db.players.createIndex( { score: 1 } , { sparse: true } )
         ...
 }
 ```
-**Text indexes** search text input có trong các field được liệt kê
+> **Text indexes** search text input có trong các field được liệt kê
 ```
 db.adminCommand({ setParameter: true, textSearchEnabled: true})
 
