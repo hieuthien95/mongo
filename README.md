@@ -112,6 +112,8 @@ PS: > db.players.createIndex( { score: 1 } , { sparse: true } )
         ...
 }
 ```
+
+
 > **Text indexes** search text input có trong các field được liệt kê
 ```
 db.adminCommand({ setParameter: true, textSearchEnabled: true})
