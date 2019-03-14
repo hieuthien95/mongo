@@ -125,9 +125,9 @@ db.collection.createIndex(
 
 db.collection.find({ 
         $text: { 
-                $search: "text noi dung",       "noi dung": "noi"->match, "dung"->match
-                                                "\"noi dung\"": "noi dung"->match
-                                                "noidung -noidungkhac": "noidung"->match, "noidungkhac"->fail
+                $search: "text noi dung",       // "noi dung": "noi"->match, "dung"->match
+                                                // "\"noi dung\"": "noi dung"->match
+                                                // "noidung -noidungkhac": "noidung"->match, "noidungkhac"->fail
                 $caseSensitive: <boolean>,    
                 $language: <string>,
                 $diacriticSensitive: <boolean>
