@@ -468,7 +468,6 @@ C:\Windows\system32> mongorestore --db mydemo --gzip --archive=tenfile.gz
 > db.products.createIndex({item: 1, type: -1})
 > db.products.createIndex({cost: 1})
 
-
 > db.products.getIndexKeys()
 [
     {
