@@ -42,7 +42,9 @@ ___
 ## 1. Cấp document
 ### a. Đánh chỉ số index
 > **single-multi option** 
+
 > **sparse option** loại bỏ null tại field được index
+
 > **ttl option** Time to live
 ```
 db.collection.createIndex( 
