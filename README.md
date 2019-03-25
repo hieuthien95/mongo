@@ -1,4 +1,15 @@
 # (I) mongo.exe
+```
+> use mydemo
+switched to db mydemo
+> db.createUser(
+...    {
+...      user: "root",
+...      pwd: "123456789",
+...      roles: [ "readWrite", "dbAdmin" ]
+...    }
+... )
+```
 ___
 ## 1. Cấp database
 #### a. Show all database
