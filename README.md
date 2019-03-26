@@ -369,7 +369,43 @@ Nội dung file:
 14. 
 15. db.persons.insert(pers)
 ```
+### h. Auto increate id
+```
+db.counters.insertMany([{_id:"productid",sequence_value:0},{_id:"articleid",sequence_value:0}])
+function getNextSequenceValue(sequenceName){
+   var sequenceDocument = db.counters.findAndModify({
+      query:{_id: sequenceName },
+      update: {$inc:{sequence_value:1}},
+      new:true
+   });
+   return sequenceDocument.sequence_value;
+}
+var seqProducrId = getNextSequenceValue("productid")
+db.products.insert({
+   "_id": seqProducrId,
+   "product_name":"Apple iPhone",
+   "category":"mobiles"
+})
+seqProducrId = getNextSequenceValue("productid")
+db.products.insert({
+   "_id": seqProducrId,
+   "product_name":"Samsung S3",
+   "category":"mobiles"
+})
 
+seqProducrId = getNextSequenceValue("articleid")
+db.articles.insert({
+   "_id": seqProducrId,
+   "product_name":"Apple iPhone",
+   "category":"mobiles"
+})
+seqProducrId = getNextSequenceValue("articleid")
+db.articles.insert({
+   "_id": seqProducrId,
+   "product_name":"Samsung S3",
+   "category":"mobiles"
+})
+```
 ___
 ___
 # (II) mongoexport.exe
