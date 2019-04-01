@@ -175,6 +175,70 @@ PS: > db.players.createIndex( { score: 1 } , { sparse: true } )
 }
 ```
 
+> Kiểm tra dung lượng các index
+```
+> db.stats().indexSize
+253952
+```
+
+```
+> db.runCommand({ dbStats: 1, scale: 1 })
+
+{
+    "db" : "payroll_stg_pms",
+    "collections" : 6,
+    "views" : 0,
+    "objects" : 32,
+    "avgObjSize" : 288.21875,
+    "dataSize" : 9223.0,
+    "storageSize" : 221184.0,
+    "numExtents" : 0,
+    "indexes" : 8,
+    "indexSize" : 253952.0,
+    "fsUsedSize" : 3630948352.0,
+    "fsTotalSize" : 214734073856.0,
+    "ok" : 1.0
+}
+```
+
+```
+> db.policy.aggregate([ { $indexStats: {} } ]);
+
+db.users.aggregate([ { $indexStats: {} } ]);
+[{
+    "name": "idx_users_by_created_at_user_status",
+    "key": {
+        "created_at": 1,
+        "user_status": 1
+    },
+    "host": "6b1b716ae456:27017",
+    "accesses": {
+        "ops": NumberLong(456550227),
+        "since": ISODate("2018-05-31T15:31:09.020Z")
+    }
+} {
+    "name": "idx_users_by_user_status",
+    "key": {
+        "user_status": 1
+    },
+    "host": "6b1b716ae456:27017",
+    "accesses": {
+        "ops": NumberLong(277641131),
+        "since": ISODate("2018-05-31T15:05:39.148Z")
+    }
+} {
+    "name": "_id_",
+    "key": {
+        "_id": 1
+    },
+    "host": "6b1b716ae456:27017",
+    "accesses": {
+        "ops": NumberLong(0),
+        "since": ISODate("2018-05-31T15:03:12.197Z")
+    }
+}]
+```
+
 ### b. Show document
 ```
 // https://docs.mongodb.com/manual/reference/operator/query/regex/index.html
