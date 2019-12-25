@@ -606,7 +606,19 @@ C:\Windows\system32> mongorestore --db mydemo --gzip --archive=tenfile.gz
 ...
 ```
 
+# Check index
+## explain
+```
+db.getCollection('user_role').find({
+    org_code: "ghnexpress",
+    user_id: "1874659",
+    app_code: "payroll"
+    })
+.explain()
+```
 
-
-
+## indexStats
+```
+db.getCollection('payroll_detail_2019_11').aggregate( [ { $indexStats: { } } ] )
+```
 
