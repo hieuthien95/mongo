@@ -125,12 +125,12 @@ PS: > db.players.createIndex( { score: 1 } , { sparse: true } )
 ```
 
 
-> **Text indexes** search text input có trong các field được liệt kê
+> **Text indexes** search text input có trong các field được liệt kê - full text search
 ```
 > db.adminCommand({ setParameter: true, textSearchEnabled: true})
 
 > db.collection.createIndex(
-   { field1>: "text", <field2>: "text"... },    // các field muốn search được liệt kê
+   { <field1>: "text", <field2>: "text"... },    // các field muốn search được liệt kê
    { default_language: "spanish" }              // docs.mongodb.com/manual/reference/text-search-languages/#text-search-languages
 )
 
