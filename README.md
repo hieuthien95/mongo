@@ -622,3 +622,28 @@ db.getCollection('user_role').find({
 db.getCollection('payroll_detail_2019_11').aggregate( [ { $indexStats: { } } ] )
 ```
 
+# ISSUE
+## check duplicate
+```
+db.getCollection("session_item").aggregate(
+    {
+        "$group": {
+            "_id": "$session_code", 
+            "count": { "$sum": 1 } 
+        } 
+    },
+    {
+        "$match": {
+            "_id": { "$ne" : null }, 
+            "count": { "$gt": 1 }
+        } 
+    },
+    {
+        "$project": {
+            "session_code" : "$_id", 
+            "_id" : 0
+        } 
+    }
+)
+```
+
