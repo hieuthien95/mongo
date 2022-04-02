@@ -652,3 +652,24 @@ db.getCollection("session_item").aggregate(
 )
 ```
 
+# Aggregate
+## $group, $sum
+```
+db.getCollection('revenue_sku_completed')
+.aggregate([
+    {
+        "$match": {
+            sku: "F9LFTHUJAB.XW761PGE",
+            time_key: {$gt: "2021-01-01"}
+        }
+    },
+    { 
+        $group: { 
+            _id: "$sku",
+            revenue_completed: { 
+                 $sum: "$revenue_completed"
+            }
+        },
+    }
+])
+```
