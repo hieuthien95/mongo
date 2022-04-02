@@ -617,6 +617,11 @@ db.getCollection('user_role').find({
 .explain()
 ```
 
+```
+COLLSCAN - cào DB -> dùng disk/ram
+IXSCAN - tìm theo INDEX DB
+```
+
 ## indexStats
 ```
 db.getCollection('payroll_detail_2019_11').aggregate( [ { $indexStats: { } } ] )
