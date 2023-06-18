@@ -673,3 +673,23 @@ db.getCollection('revenue_sku_completed')
     }
 ])
 ```
+
+```
+db.getCollection('order_detail')
+.aggregate([
+    {
+        "$match": {
+            created_time: {$gt: ISODate("2023-05-18T19:27:09.300+07:00"),}
+        }
+    },
+    { 
+        $group: { 
+            _id: "$customer_id",
+            c: { 
+                $sum: 1
+            }
+        },
+    },
+    { $sort: { c: -1 } }
+])
+```
